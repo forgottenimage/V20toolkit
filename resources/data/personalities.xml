@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<personalities>
+    <personality>
+        <description>test</description>
+        <name>test</name>
+        <willpowerCondition>test</willpowerCondition>
+    </personality>
+</personalities>
