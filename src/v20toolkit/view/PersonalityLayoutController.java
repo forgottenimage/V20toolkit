@@ -1,17 +1,16 @@
 package v20toolkit.view;
 
-import com.sun.xml.internal.bind.v2.TODO;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
 import v20toolkit.V20toolkit;
 import v20toolkit.model.Personality;
 
 public class PersonalityLayoutController {
 
     @FXML
-    private ListView<Personality> personalityList;
+    private TableView<Personality> personalityTable;
+    @FXML
+    private TableColumn<Personality, String> personalityColumn;
     @FXML
     private Label nameLabel;
     @FXML
@@ -25,15 +24,15 @@ public class PersonalityLayoutController {
 
     @FXML
     private void initialize() {
-        // TODO replace the object identifier in the list with the name ... (should be very easy but I just couldn't find a way..)
-        //personalityList.setCellFactory();
+        // TODO Workaround: Used TableView instead of ListView to show the Name. It works but doesn't look very well.
+        personalityColumn.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
         showPersonalityDetails(null);
-        personalityList.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> showPersonalityDetails(newValue));
+        personalityTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> showPersonalityDetails(newValue));
     }
 
     public void setMainApp(V20toolkit v20toolkit) {
         this.v20toolkit = v20toolkit;
-        personalityList.setItems(v20toolkit.getPersonalityData());
+        personalityTable.setItems(v20toolkit.getPersonalityData());
     }
 
     private void showPersonalityDetails(Personality personality) {
@@ -45,6 +44,53 @@ public class PersonalityLayoutController {
             nameLabel.setText("");
             descriptionLabel.setText("");
             willpowerConditionLabel.setText("");
+        }
+    }
+
+    @FXML
+    private void handleDeletePersonality() {
+        int selectedIndex = personalityTable.getSelectionModel().getSelectedIndex();
+        if (selectedIndex >= 0) {
+            personalityTable.getItems().remove(selectedIndex);
+        } else {
+            // Nothing selected.
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.initOwner(v20toolkit.getPrimaryStage());
+            alert.setTitle("No Selection");
+            alert.setHeaderText("No Personality Selected");
+            alert.setContentText("Please select a personality in the table.");
+
+            alert.showAndWait();
+        }
+    }
+
+    @FXML
+    private void handleNewPersonality() {
+        Personality tempPersonality = new Personality();
+        boolean okClicked = v20toolkit.showPersonalityEditDialog(tempPersonality);
+        if (okClicked) {
+            v20toolkit.getPersonalityData().add(tempPersonality);
+        }
+    }
+
+    @FXML
+    private void handleEditPersonality() {
+        Personality selectedPersonality = personalityTable.getSelectionModel().getSelectedItem();
+        if (selectedPersonality != null) {
+            boolean okClicked = v20toolkit.showPersonalityEditDialog(selectedPersonality);
+            if (okClicked) {
+                showPersonalityDetails(selectedPersonality);
+            }
+
+        } else {
+            // Nothing selected.
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.initOwner(v20toolkit.getPrimaryStage());
+            alert.setTitle("No Selection");
+            alert.setHeaderText("No personality Selected");
+            alert.setContentText("Please select a personality in the table.");
+
+            alert.showAndWait();
         }
     }
 }

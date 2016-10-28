@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -14,13 +17,17 @@
          <items>
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <ListView fx:id="personalityList" prefHeight="398.0" prefWidth="295.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                  <TableView fx:id="personalityTable" prefHeight="398.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <columns>
+                      <TableColumn fx:id="personalityColumn" prefWidth="173.0" text="Concepts" />
+                    </columns>
+                  </TableView>
                </children>
             </AnchorPane>
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                <children>
                   <Label fx:id="nameLabel" layoutX="14.0" layoutY="14.0" text="Label" />
-                  <GridPane layoutX="14.0" layoutY="62.0" prefHeight="324.0" prefWidth="367.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="50.0">
+                  <GridPane layoutX="14.0" layoutY="62.0" prefHeight="284.0" prefWidth="377.0" AnchorPane.bottomAnchor="64.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="50.0">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -34,6 +41,13 @@
                         <Label fx:id="willpowerConditionLabel" text="Label" GridPane.rowIndex="1" />
                      </children>
                   </GridPane>
+                  <ButtonBar layoutX="96.0" layoutY="351.0" prefHeight="40.0" prefWidth="200.0">
+                    <buttons>
+                      <Button mnemonicParsing="false" onAction="#handleNewPersonality" text="New" />
+                        <Button mnemonicParsing="false" onAction="#handleEditPersonality" text="Edit" />
+                        <Button minWidth="77.0" mnemonicParsing="false" onAction="#handleDeletePersonality" prefHeight="0.0" prefWidth="123.0" text="Delete" />
+                    </buttons>
+                  </ButtonBar>
                </children>
             </AnchorPane>
          </items>

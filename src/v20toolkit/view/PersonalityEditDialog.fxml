@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="370.0" prefWidth="476.0" styleClass="background" stylesheets="@DarkTheme.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="v20toolkit.view.PersonalityEditDialogController">
+    <children>
+        <GridPane layoutX="45.0" layoutY="166.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="183.0" minWidth="10.0" prefWidth="109.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="317.0" minWidth="10.0" prefWidth="317.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints maxHeight="70.0" minHeight="10.0" prefHeight="39.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="170.0" minHeight="10.0" prefHeight="135.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="126.0" minHeight="10.0" prefHeight="126.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <Label text="Name" />
+                <Label text="Description" GridPane.rowIndex="1" />
+                <Label text="Willpower Condition" GridPane.rowIndex="2" />
+                <TextField fx:id="nameField" GridPane.columnIndex="1" />
+                <TextField fx:id="descriptionField" prefHeight="119.0" prefWidth="243.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <TextField fx:id="willpowerConditionField" prefHeight="108.0" prefWidth="243.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            </children>
+        </GridPane>
+        <ButtonBar layoutX="186.0" layoutY="246.0" prefHeight="40.0" prefWidth="200.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">
+            <buttons>
+                <Button defaultButton="true" mnemonicParsing="false" onAction="#handleOk" text="OK" />
+                <Button mnemonicParsing="false" onAction="#handleCancel" text="Cancel" />
+            </buttons>
+        </ButtonBar>
+    </children>
+</AnchorPane>

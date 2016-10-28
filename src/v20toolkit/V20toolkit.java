@@ -9,9 +9,11 @@ import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import v20toolkit.model.Personality;
 import v20toolkit.model.PersonalityListWrapper;
+import v20toolkit.view.PersonalityEditDialogController;
 import v20toolkit.view.PersonalityLayoutController;
 import v20toolkit.view.RootLayoutController;
 
@@ -29,6 +31,9 @@ public class V20toolkit extends Application {
 
     public ObservableList<Personality> getPersonalityData() {
         return personalityData;
+    }
+    public Stage getPrimaryStage() {
+        return primaryStage;
     }
 
     public V20toolkit (){
@@ -72,6 +77,34 @@ public class V20toolkit extends Application {
 
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    public boolean showPersonalityEditDialog(Personality personality) {
+        try {
+            // Load the fxml file and create a new stage for the popup dialog.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(V20toolkit.class.getResource("/v20toolkit/view/PersonalityEditDialog.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
+
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Edit Personality");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(primaryStage);
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+
+            PersonalityEditDialogController controller = loader.getController();
+            controller.setDialogStage(dialogStage);
+            controller.setPersonality(personality);
+
+            // Show the dialog and wait until the user closes it
+            dialogStage.showAndWait();
+
+            return controller.isOkClicked();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
         }
     }
 
