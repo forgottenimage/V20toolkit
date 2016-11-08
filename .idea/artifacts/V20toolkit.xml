@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="V20toolkit">
+    <output-path>$PROJECT_DIR$/out/artifacts/V20toolkit</output-path>
+    <root id="archive" name="V20toolkit.jar">
+      <element id="module-output" name="V20toolkit" />
+      <element id="dir-copy" path="$PROJECT_DIR$/resources" />
+    </root>
+  </artifact>
+</component>

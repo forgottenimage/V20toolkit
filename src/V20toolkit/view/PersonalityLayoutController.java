@@ -1,9 +1,9 @@
-package v20toolkit.view;
+package V20toolkit.view;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import v20toolkit.V20toolkit;
-import v20toolkit.model.Personality;
+import V20toolkit.V20toolkit;
+import V20toolkit.model.Personality;
 
 public class PersonalityLayoutController {
 
@@ -14,9 +14,9 @@ public class PersonalityLayoutController {
     @FXML
     private Label nameLabel;
     @FXML
-    private Label descriptionLabel;
+    private TextArea descriptionTextArea;
     @FXML
-    private Label willpowerConditionLabel;
+    private TextArea willpowerConditionTextArea;
 
     private V20toolkit v20toolkit;
 
@@ -38,12 +38,12 @@ public class PersonalityLayoutController {
     private void showPersonalityDetails(Personality personality) {
         if (personality != null) {
             nameLabel.setText(personality.getName());
-            descriptionLabel.setText(personality.getDescription());
-            willpowerConditionLabel.setText(personality.getWillpowerCondition());
+            descriptionTextArea.setText(personality.getDescription());
+            willpowerConditionTextArea.setText(personality.getWillpowerCondition());
         } else {
             nameLabel.setText("");
-            descriptionLabel.setText("");
-            willpowerConditionLabel.setText("");
+            descriptionTextArea.setText("");
+            willpowerConditionTextArea.setText("");
         }
     }
 

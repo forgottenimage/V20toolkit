@@ -1,8 +1,6 @@
-package v20toolkit.model;
+package V20toolkit.model;
 
 import javafx.beans.property.*;
-
-import java.util.ArrayList;
 
 
 /**

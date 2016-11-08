@@ -1,8 +1,10 @@
-package v20toolkit.view;
+package V20toolkit.view;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
-import v20toolkit.V20toolkit;
+import V20toolkit.V20toolkit;
+
+import java.io.File;
 
 /**
  * Created by baarzul on 19.10.16.
@@ -51,5 +53,16 @@ public class RootLayoutController {
     private void handlePersonalityOverview() {
 
         v20toolkit.showPersonalityOverview();
+    }
+
+    @FXML
+    private void handleSave() {
+        File personalityFile = v20toolkit.getPersonFilePath();
+        if (personalityFile != null) {
+            v20toolkit.savePersonalityDataToFile(personalityFile);
+        } else {
+            //Todo: Errorhandling
+            //handleSaveAs();
+        }
     }
 }

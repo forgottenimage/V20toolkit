@@ -1,19 +1,19 @@
-package v20toolkit.view;
+package V20toolkit.view;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
-import javafx.scene.control.TextField;
+import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
-import v20toolkit.model.Personality;
+import V20toolkit.model.Personality;
 
 public class PersonalityEditDialogController {
 
     @FXML
-    private TextField nameField;
+    private TextArea nameTextArea;
     @FXML
-    private TextField descriptionField;
+    private TextArea descriptionTestArea;
     @FXML
-    private TextField willpowerConditionField;
+    private TextArea willpowerConditionTextArea;
 
 
     private Stage dialogStage;
@@ -30,9 +30,9 @@ public class PersonalityEditDialogController {
     public void setPersonality(Personality personality) {
         this.personality = personality;
 
-        nameField.setText(personality.getName());
-        descriptionField.setText(personality.getDescription());
-        willpowerConditionField.setText(personality.getWillpowerCondition());
+        nameTextArea.setText(personality.getName());
+        descriptionTestArea.setText(personality.getDescription());
+        willpowerConditionTextArea.setText(personality.getWillpowerCondition());
     }
 
     /**
@@ -50,9 +50,9 @@ public class PersonalityEditDialogController {
     @FXML
     private void handleOk() {
         if (isInputValid()) {
-            personality.setName(nameField.getText());
-            personality.setDescription(descriptionField.getText());
-            personality.setWillpowerCondition(willpowerConditionField.getText());
+            personality.setName(nameTextArea.getText());
+            personality.setDescription(descriptionTestArea.getText());
+            personality.setWillpowerCondition(willpowerConditionTextArea.getText());
             okClicked = true;
             dialogStage.close();
         }
@@ -74,13 +74,13 @@ public class PersonalityEditDialogController {
     private boolean isInputValid() {
         String errorMessage = "";
 
-        if (nameField.getText() == null || nameField.getText().length() == 0) {
+        if (nameTextArea.getText() == null || nameTextArea.getText().length() == 0) {
             errorMessage += "No valid first name!\n";
         }
-        if (descriptionField.getText() == null || descriptionField.getText().length() == 0) {
+        if (descriptionTestArea.getText() == null || descriptionTestArea.getText().length() == 0) {
             errorMessage += "No valid last name!\n";
         }
-        if (willpowerConditionField.getText() == null || willpowerConditionField.getText().length() == 0) {
+        if (willpowerConditionTextArea.getText() == null || willpowerConditionTextArea.getText().length() == 0) {
             errorMessage += "No valid street!\n";
         }
 

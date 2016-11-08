@@ -1,4 +1,4 @@
-package v20toolkit;
+package V20toolkit;
 
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -11,17 +11,18 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import v20toolkit.model.Personality;
-import v20toolkit.model.PersonalityListWrapper;
-import v20toolkit.view.PersonalityEditDialogController;
-import v20toolkit.view.PersonalityLayoutController;
-import v20toolkit.view.RootLayoutController;
+import V20toolkit.model.Personality;
+import V20toolkit.model.PersonalityListWrapper;
+import V20toolkit.view.PersonalityEditDialogController;
+import V20toolkit.view.PersonalityLayoutController;
+import V20toolkit.view.RootLayoutController;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import java.io.File;
 import java.io.IOException;
+import java.util.prefs.Preferences;
 
 public class V20toolkit extends Application {
 
@@ -37,21 +38,22 @@ public class V20toolkit extends Application {
     }
 
     public V20toolkit (){
-        personalityData.add(new Personality("test", "test", "test"));
+
+        //personalityData.add(new Personality("test", "test", "test"));
     }
 
     public void initRootLayout() {
         try {
             // Load root layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(V20toolkit.class.getResource("/v20toolkit/view/RootLayout.fxml"));
+            loader.setLocation(V20toolkit.class.getResource("/V20toolkit/view/RootLayout.fxml"));
             rootLayout = (BorderPane) loader.load();
 
             // Show the scene containing the root layout.
             Scene scene = new Scene(rootLayout);
             primaryStage.setScene(scene);
 
-            // Give the v20toolkit.controller access to the main app.
+            // Give the V20toolkit.controller access to the main app.
             RootLayoutController controller = loader.getController();
             controller.setMainApp(this);
 
@@ -65,7 +67,7 @@ public class V20toolkit extends Application {
         try {
             // Load person overview.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(V20toolkit.class.getResource("/v20toolkit/view/PersonalityLayout.fxml"));
+            loader.setLocation(V20toolkit.class.getResource("/V20toolkit/view/PersonalityLayout.fxml"));
             AnchorPane personalityOverview = (AnchorPane) loader.load();
 
             // Set person overview into the center of root layout.
@@ -84,7 +86,7 @@ public class V20toolkit extends Application {
         try {
             // Load the fxml file and create a new stage for the popup dialog.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(V20toolkit.class.getResource("/v20toolkit/view/PersonalityEditDialog.fxml"));
+            loader.setLocation(V20toolkit.class.getResource("/V20toolkit/view/PersonalityEditDialog.fxml"));
             AnchorPane page = (AnchorPane) loader.load();
 
             Stage dialogStage = new Stage();
@@ -150,6 +152,16 @@ public class V20toolkit extends Application {
 
             alert.showAndWait();
         }
+    }
+
+    public File getPersonFilePath() {
+        //Preferences prefs = Preferences.userNodeForPackage(MainApp.class);
+        //String filePath = prefs.get("filePath", null);
+        //if (filePath != null) {
+            return new File("resources/data/personalities.xml");
+        //} else {
+        //    return null;
+        //}
     }
 
     public static void main(String[] args) {

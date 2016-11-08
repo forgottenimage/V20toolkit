@@ -1,4 +1,4 @@
-package v20toolkit.model;
+package V20toolkit.model;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
