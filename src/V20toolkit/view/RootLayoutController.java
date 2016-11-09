@@ -51,18 +51,11 @@ public class RootLayoutController {
      */
     @FXML
     private void handlePersonalityOverview() {
-
         v20toolkit.showPersonalityOverview();
     }
 
     @FXML
-    private void handleSave() {
-        File personalityFile = v20toolkit.getPersonFilePath();
-        if (personalityFile != null) {
-            v20toolkit.savePersonalityDataToFile(personalityFile);
-        } else {
-            //Todo: Errorhandling
-            //handleSaveAs();
-        }
+    private void handleTraitOverview() {
+        v20toolkit.showTraitOverview();
     }
 }

@@ -1,9 +1,15 @@
 package V20toolkit.view;
 
+import V20toolkit.model.PersonalityListWrapper;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import V20toolkit.V20toolkit;
 import V20toolkit.model.Personality;
+
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Marshaller;
+import java.io.File;
 
 public class PersonalityLayoutController {
 
@@ -19,6 +25,7 @@ public class PersonalityLayoutController {
     private TextArea willpowerConditionTextArea;
 
     private V20toolkit v20toolkit;
+    private ObservableList<Personality> personalityData;
 
     public PersonalityLayoutController(){}
 
@@ -32,7 +39,8 @@ public class PersonalityLayoutController {
 
     public void setMainApp(V20toolkit v20toolkit) {
         this.v20toolkit = v20toolkit;
-        personalityTable.setItems(v20toolkit.getPersonalityData());
+        personalityData = v20toolkit.getPersonalityData();
+        personalityTable.setItems(personalityData);
     }
 
     private void showPersonalityDetails(Personality personality) {
@@ -90,6 +98,24 @@ public class PersonalityLayoutController {
             alert.setHeaderText("No personality Selected");
             alert.setContentText("Please select a personality in the table.");
 
+            alert.showAndWait();
+        }
+    }
+
+    public void handleSavePersonalities() {
+        File file = new File("resources/data/personalities.xml");
+        try {
+            JAXBContext context = JAXBContext.newInstance(PersonalityListWrapper.class);
+            Marshaller m = context.createMarshaller();
+            m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+            PersonalityListWrapper wrapper = new PersonalityListWrapper();
+            wrapper.setPersonalities(personalityData);
+            m.marshal(wrapper, file);
+        } catch (Exception e) { // catches ANY exception
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Could not save data");
+            alert.setContentText("Could not save data to file:\n" + file.getPath());
             alert.showAndWait();
         }
     }

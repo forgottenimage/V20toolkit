@@ -11,15 +11,12 @@
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
-                  <MenuItem mnemonicParsing="false" text="New" />
-                  <MenuItem mnemonicParsing="false" text="Open..." />
-                  <MenuItem mnemonicParsing="false" onAction="#handleSave" text="Save" />
-                  <MenuItem mnemonicParsing="false" onAction="#handleSave" text="Save As..." />
               <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
             </items>
           </Menu>
             <Menu mnemonicParsing="false" text="Resources">
               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#handleTraitOverview" text="Traits" />
                 <MenuItem mnemonicParsing="false" onAction="#handlePersonalityOverview" text="Personalities" />
               </items>
             </Menu>

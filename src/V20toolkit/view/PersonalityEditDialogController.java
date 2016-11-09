@@ -15,7 +15,6 @@ public class PersonalityEditDialogController {
     @FXML
     private TextArea willpowerConditionTextArea;
 
-
     private Stage dialogStage;
     private Personality personality;
     private boolean okClicked = false;
@@ -35,11 +34,6 @@ public class PersonalityEditDialogController {
         willpowerConditionTextArea.setText(personality.getWillpowerCondition());
     }
 
-    /**
-     * Returns true if the user clicked OK, false otherwise.
-     *
-     * @return
-     */
     public boolean isOkClicked() {
         return okClicked;
     }
