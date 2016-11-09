@@ -1,8 +1,3 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <personalities>
-    <personality>
-        <description>The Architect has a sense of purpose even greaterthan herself. She is truly happy only when creatingsomething of lasting value for others. People will al-ways need things, and the Architect strives to provideat least one necessity. Inventors, pioneers, town found-ers, entrepreneurs, and the like are all Architect Ar-chetypes. A Kindred Architect might seek to createnew laws that affect her fellow undead, or she mightaim to establish a new Anarch domain.</description>
-        <name>Architect</name>
-        <willpowerCondition>Regain a point of Willpower whenever you estab-lish something of importance or lasting value.</willpowerCondition>
-    </personality>
 </personalities>
