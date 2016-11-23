@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<personalities>
+<resource>
     <personality>
         <description>Hidhfxgsjgf</description>
         <name>Huhu</name>
         <willpowerCondition>Hi</willpowerCondition>
     </personality>
-</personalities>
+</resource>

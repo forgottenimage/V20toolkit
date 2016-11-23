@@ -1,21 +1,16 @@
 package V20toolkit.view;
 
 import V20toolkit.V20toolkit;
-import V20toolkit.model.Personality;
-import V20toolkit.model.PersonalityListWrapper;
 import V20toolkit.model.Trait;
-import V20toolkit.model.TraitListWrapper;
+import V20toolkit.util.XMLProcessing;
+import V20toolkit.util.XMLWrapper;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 import java.io.File;
 
-/**
- * Created by baarzul on 09.11.16.
- */
 public class TraitLayoutController {
 
     @FXML
@@ -30,6 +25,8 @@ public class TraitLayoutController {
     private Label pointsLabel;
     @FXML
     private Label nameLabel;
+    @FXML
+    private Label resourceLabel;
     @FXML
     private TextArea descriptionTextArea;
 
@@ -58,12 +55,14 @@ public class TraitLayoutController {
             typeLabel.setText(trait.getType());
             attributeLabel.setText(trait.getAttribute());
             pointsLabel.setText("" + trait.getPoints());
+            resourceLabel.setText(trait.getResource());
             descriptionTextArea.setText(trait.getDescription());
         } else {
             nameLabel.setText("");
             typeLabel.setText("");
             attributeLabel.setText("");
             pointsLabel.setText("");
+            resourceLabel.setText("");
             descriptionTextArea.setText("");
         }
     }
@@ -74,13 +73,11 @@ public class TraitLayoutController {
         if (selectedIndex >= 0) {
             traitTable.getItems().remove(selectedIndex);
         } else {
-            // Nothing selected.
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.initOwner(v20toolkit.getPrimaryStage());
             alert.setTitle("No Selection");
             alert.setHeaderText("No Trait Selected");
             alert.setContentText("Please select a Trait in the table.");
-
             alert.showAndWait();
         }
     }
@@ -102,39 +99,19 @@ public class TraitLayoutController {
             if (okClicked) {
                 showTraitDetails(selectedTrait);
             }
-
         } else {
-            // Nothing selected.
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.initOwner(v20toolkit.getPrimaryStage());
             alert.setTitle("No Selection");
             alert.setHeaderText("No Trait Selected");
             alert.setContentText("Please select a trait in the table.");
-
             alert.showAndWait();
         }
     }
 
     @FXML
     private void handleSaveTraits() {
-        File file = new File("resources/data/traits.xml");
-
-        try {
-            JAXBContext context = JAXBContext.newInstance(TraitListWrapper.class);
-            Marshaller m = context.createMarshaller();
-            m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-
-            TraitListWrapper wrapper = new TraitListWrapper();
-            wrapper.setTraits(traitData);
-
-            m.marshal(wrapper, file);
-        } catch (Exception e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("Could not save data");
-            alert.setContentText("Could not save data to file:\n" + file.getPath());
-
-            alert.showAndWait();
-        }
+        String path = "resources/data/traits.xml";
+        XMLProcessing.saveXML(path, traitData);
     }
 }

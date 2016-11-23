@@ -1,6 +1,7 @@
 package V20toolkit.view;
 
-import V20toolkit.model.PersonalityListWrapper;
+import V20toolkit.util.XMLProcessing;
+import V20toolkit.util.XMLWrapper;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -103,20 +104,7 @@ public class PersonalityLayoutController {
     }
 
     public void handleSavePersonalities() {
-        File file = new File("resources/data/personalities.xml");
-        try {
-            JAXBContext context = JAXBContext.newInstance(PersonalityListWrapper.class);
-            Marshaller m = context.createMarshaller();
-            m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-            PersonalityListWrapper wrapper = new PersonalityListWrapper();
-            wrapper.setPersonalities(personalityData);
-            m.marshal(wrapper, file);
-        } catch (Exception e) { // catches ANY exception
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("Could not save data");
-            alert.setContentText("Could not save data to file:\n" + file.getPath());
-            alert.showAndWait();
-        }
+        String path = "resources/data/personalities.xml";
+        XMLProcessing.saveXML(path, personalityData);
     }
 }

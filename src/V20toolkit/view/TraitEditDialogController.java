@@ -20,6 +20,8 @@ public class TraitEditDialogController {
     @FXML
     private TextArea pointsTextArea;
     @FXML
+    private TextArea resourceTextArea;
+    @FXML
     private TextArea descriptionTextArea;
 
     private Stage dialogStage;
@@ -40,6 +42,7 @@ public class TraitEditDialogController {
         descriptionTextArea.setText(trait.getDescription());
         attributeTextArea.setText(trait.getAttribute());
         pointsTextArea.setText("" + trait.getPoints());
+        resourceTextArea.setText(trait.getResource());
         typeTextArea.setText(trait.getType());
     }
 
@@ -54,6 +57,7 @@ public class TraitEditDialogController {
             trait.setDescription(descriptionTextArea.getText());
             trait.setAttribute(attributeTextArea.getText());
             trait.setPoints(Integer.parseInt(pointsTextArea.getText()));
+            trait.setResource(resourceTextArea.getText());
             trait.setType(typeTextArea.getText());
             okClicked = true;
             dialogStage.close();
@@ -78,6 +82,9 @@ public class TraitEditDialogController {
             errorMessage += "No valid last name!\n";
         }
         if (pointsTextArea.getText() == null || pointsTextArea.getText().length() == 0) {
+            errorMessage += "No valid last name!\n";
+        }
+        if (resourceTextArea.getText() == null || resourceTextArea.getText().length() == 0) {
             errorMessage += "No valid last name!\n";
         }
         if (typeTextArea.getText() == null || typeTextArea.getText().length() == 0) {

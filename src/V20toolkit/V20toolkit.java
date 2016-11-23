@@ -1,7 +1,8 @@
 package V20toolkit;
 
-import V20toolkit.model.Trait;
-import V20toolkit.model.TraitListWrapper;
+import V20toolkit.model.*;
+import V20toolkit.util.XMLProcessing;
+import V20toolkit.util.XMLWrapper;
 import V20toolkit.view.*;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -14,13 +15,12 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import V20toolkit.model.Personality;
-import V20toolkit.model.PersonalityListWrapper;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 public class V20toolkit extends Application {
 
@@ -54,21 +54,9 @@ public class V20toolkit extends Application {
     }
 
     public void showPersonalityOverview() {
-        File file = new File("resources/data/personalities.xml");
-        try {
-            JAXBContext context = JAXBContext.newInstance(PersonalityListWrapper.class);
-            Unmarshaller um = context.createUnmarshaller();
-            PersonalityListWrapper wrapper = (PersonalityListWrapper) um.unmarshal(file);
-            personalityData.clear();
-            personalityData.addAll(wrapper.getPersonalities());
-        } catch (Exception e) {
-            System.out.print(e);
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("Could not load data");
-            alert.setContentText("Could not load data from file:\n" + file.getPath());
-            alert.showAndWait();
-        }
+        String path = "resources/data/personalities.xml";
+        //noinspection unchecked
+        personalityData = (ObservableList<Personality>) XMLProcessing.loadXML(path, personalityData);
 
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -83,21 +71,10 @@ public class V20toolkit extends Application {
     }
 
     public void showTraitOverview() {
-        File file = new File("resources/data/traits.xml");
-        try {
-            JAXBContext context = JAXBContext.newInstance(TraitListWrapper.class);
-            Unmarshaller um = context.createUnmarshaller();
-            TraitListWrapper wrapper = (TraitListWrapper) um.unmarshal(file);
-            traitData.clear();
-            traitData.addAll(wrapper.getTraits());
-        } catch (Exception e) {
-            System.out.print(e);
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("Could not load data");
-            alert.setContentText("Could not load data from file:\n" + file.getPath());
-            alert.showAndWait();
-        }
+        String path = "resources/data/traits.xml";
+        //noinspection unchecked
+        traitData = (ObservableList<Trait>) XMLProcessing.loadXML(path, traitData);
+
 
         try {
             FXMLLoader loader = new FXMLLoader();
