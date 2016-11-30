@@ -17,13 +17,18 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 public class V20toolkit extends Application {
 
+    public ResourceBundle i18n;
+    private Locale currentLocale;
     private Stage primaryStage;
     private BorderPane rootLayout;
     private ObservableList<Personality> personalityData = FXCollections.observableArrayList();
     private ObservableList<Trait> traitData = FXCollections.observableArrayList();
+
     public ObservableList<Personality> getPersonalityData() {
         return personalityData;
     }
@@ -31,6 +36,7 @@ public class V20toolkit extends Application {
     public Stage getPrimaryStage() {
         return primaryStage;
     }
+    public ResourceBundle getI18n() { return i18n; }
 
     public V20toolkit (){}
 
@@ -99,7 +105,7 @@ public class V20toolkit extends Application {
             loader.setLocation(V20toolkit.class.getResource("/V20toolkit/view/PersonalityEditDialog.fxml"));
             AnchorPane page = loader.load();
             Stage dialogStage = new Stage();
-            dialogStage.setTitle("Edit Personality");
+            dialogStage.setTitle(i18n.getString("v20_edit_personality"));
             dialogStage.initModality(Modality.WINDOW_MODAL);
             dialogStage.initOwner(primaryStage);
             Scene scene = new Scene(page);
@@ -121,7 +127,7 @@ public class V20toolkit extends Application {
             loader.setLocation(V20toolkit.class.getResource("/V20toolkit/view/TraitEditDialog.fxml"));
             AnchorPane page = loader.load();
             Stage dialogStage = new Stage();
-            dialogStage.setTitle("Edit Trait");
+            dialogStage.setTitle(i18n.getString("v20_edit_trait"));
             dialogStage.initModality(Modality.WINDOW_MODAL);
             dialogStage.initOwner(primaryStage);
             Scene scene = new Scene(page);
@@ -143,8 +149,11 @@ public class V20toolkit extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+
+        currentLocale = new Locale("en", "GB");
+        i18n = ResourceBundle.getBundle("bundles.locale", currentLocale);
         this.primaryStage = primaryStage;
-        this.primaryStage.setTitle("V20toolkit");
+        this.primaryStage.setTitle(i18n.getString("v20_title"));
         this.primaryStage.getIcons().add(new Image("file:resources/images/ident_icon.png"));
         initRootLayout();
     }
