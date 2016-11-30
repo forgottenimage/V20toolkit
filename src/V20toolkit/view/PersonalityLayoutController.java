@@ -8,9 +8,7 @@ import javafx.scene.control.*;
 import V20toolkit.V20toolkit;
 import V20toolkit.model.Personality;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Marshaller;
-import java.io.File;
+import java.util.List;
 
 public class PersonalityLayoutController {
 
@@ -26,7 +24,7 @@ public class PersonalityLayoutController {
     private TextArea willpowerConditionTextArea;
 
     private V20toolkit v20toolkit;
-    private ObservableList<Personality> personalityData;
+    private ObservableList personalityData;
 
     public PersonalityLayoutController(){}
 
@@ -105,6 +103,8 @@ public class PersonalityLayoutController {
 
     public void handleSavePersonalities() {
         String path = "resources/data/personalities.xml";
-        XMLProcessing.saveXML(path, personalityData);
+        XMLWrapper wrapper = new XMLWrapper();
+        wrapper.setPersonalities(personalityData);
+        XMLProcessing.marshalToFile(path, wrapper);
     }
 }

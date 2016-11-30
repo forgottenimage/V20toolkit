@@ -9,18 +9,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Unmarshaller;
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
 
 public class V20toolkit extends Application {
 
@@ -38,11 +34,11 @@ public class V20toolkit extends Application {
 
     public V20toolkit (){}
 
-    public void initRootLayout() {
+    private void initRootLayout() {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(V20toolkit.class.getResource("/V20toolkit/view/RootLayout.fxml"));
-            rootLayout = (BorderPane) loader.load();
+            rootLayout = loader.load();
             Scene scene = new Scene(rootLayout);
             primaryStage.setScene(scene);
             RootLayoutController controller = loader.getController();
@@ -54,14 +50,19 @@ public class V20toolkit extends Application {
     }
 
     public void showPersonalityOverview() {
-        String path = "resources/data/personalities.xml";
-        //noinspection unchecked
-        personalityData = (ObservableList<Personality>) XMLProcessing.loadXML(path, personalityData);
-
+        personalityData.add(new Personality());
+        File file = new File("resources/data/personalities.xml");
+        if (file.isFile()) {
+            XMLWrapper wrapper =  XMLProcessing.unmarshalFromFile(file);
+            if (wrapper.getPersonalities()!= null) {
+                personalityData.clear();
+                personalityData.addAll(wrapper.getPersonalities());
+            }
+        }
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(V20toolkit.class.getResource("/V20toolkit/view/PersonalityLayout.fxml"));
-            AnchorPane personalityOverview = (AnchorPane) loader.load();
+            AnchorPane personalityOverview = loader.load();
             rootLayout.setCenter(personalityOverview);
             PersonalityLayoutController controller = loader.getController();
             controller.setMainApp(this);
@@ -71,15 +72,19 @@ public class V20toolkit extends Application {
     }
 
     public void showTraitOverview() {
-        String path = "resources/data/traits.xml";
-        //noinspection unchecked
-        traitData = (ObservableList<Trait>) XMLProcessing.loadXML(path, traitData);
-
-
+        traitData.add(new Trait());
+        File file = new File("resources/data/traits.xml");
+        if (file.isFile()) {
+            XMLWrapper wrapper = XMLProcessing.unmarshalFromFile(file);
+            if (wrapper.getTraits() != null) {
+                traitData.clear();
+                traitData.addAll(wrapper.getTraits());
+            }
+        }
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(V20toolkit.class.getResource("/V20toolkit/view/TraitLayout.fxml"));
-            AnchorPane traitOverview = (AnchorPane) loader.load();
+            AnchorPane traitOverview = loader.load();
             rootLayout.setCenter(traitOverview);
             TraitLayoutController controller = loader.getController();
             controller.setMainApp(this);
@@ -92,7 +97,7 @@ public class V20toolkit extends Application {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(V20toolkit.class.getResource("/V20toolkit/view/PersonalityEditDialog.fxml"));
-            AnchorPane page = (AnchorPane) loader.load();
+            AnchorPane page = loader.load();
             Stage dialogStage = new Stage();
             dialogStage.setTitle("Edit Personality");
             dialogStage.initModality(Modality.WINDOW_MODAL);
@@ -114,7 +119,7 @@ public class V20toolkit extends Application {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(V20toolkit.class.getResource("/V20toolkit/view/TraitEditDialog.fxml"));
-            AnchorPane page = (AnchorPane) loader.load();
+            AnchorPane page = loader.load();
             Stage dialogStage = new Stage();
             dialogStage.setTitle("Edit Trait");
             dialogStage.initModality(Modality.WINDOW_MODAL);

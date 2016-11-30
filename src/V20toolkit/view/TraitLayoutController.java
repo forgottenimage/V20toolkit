@@ -7,9 +7,8 @@ import V20toolkit.util.XMLWrapper;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Marshaller;
-import java.io.File;
+
+import java.util.List;
 
 public class TraitLayoutController {
 
@@ -31,7 +30,7 @@ public class TraitLayoutController {
     private TextArea descriptionTextArea;
 
     private V20toolkit v20toolkit;
-    private ObservableList<Trait> traitData;
+    private ObservableList traitData;
 
     public TraitLayoutController(){}
 
@@ -112,6 +111,8 @@ public class TraitLayoutController {
     @FXML
     private void handleSaveTraits() {
         String path = "resources/data/traits.xml";
-        XMLProcessing.saveXML(path, traitData);
+        XMLWrapper wrapper = new XMLWrapper();
+        wrapper.setTraits(traitData);
+        XMLProcessing.marshalToFile(path, wrapper);
     }
 }

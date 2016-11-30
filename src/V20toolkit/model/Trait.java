@@ -14,7 +14,7 @@ public class Trait {
     private final StringProperty resource;
 
     public Trait(){
-        this(null, null, null, null, 0, null);
+        this("Name of Trait", "Describe the Trait", "Physical, Social, Mental or Magical?", "Merit or Flaw?", 0, "Where did you find it?");
     }
 
     public Trait(String name, String description, String attribute, String type, Integer points, String resource) {

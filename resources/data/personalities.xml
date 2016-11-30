@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<resource>
+<resources>
     <personality>
-        <description>Hidhfxgsjgf</description>
-        <name>Huhu</name>
-        <willpowerCondition>Hi</willpowerCondition>
+        <description>Personality description</description>
+        <name>Name of the Personality</name>
+        <willpowerCondition>Condition for regaining the Willpower</willpowerCondition>
     </personality>
-</resource>
+</resources>

@@ -8,7 +8,7 @@ public class Personality {
     private final StringProperty description;
     private final StringProperty willpowerCondition;
 
-    public Personality() {this(null, null, null);}
+    public Personality() {this("Name of the Personality", "Personality description", "Condition for regaining the Willpower");}
 
     public Personality(String name, String description, String willpowerCondition) {
         this.name = new SimpleStringProperty(name);
