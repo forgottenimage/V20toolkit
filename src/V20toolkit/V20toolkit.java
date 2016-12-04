@@ -54,7 +54,7 @@ public class V20toolkit extends Application {
     }
 
     public void showPersonalityOverview() {
-        v20PersonalityData.add(new v20Personality());
+        v20PersonalityData.add(new v20Personality(i18n));
         File file = new File("resources/data/personalities.xml");
         if (file.isFile()) {
             XMLWrapper wrapper =  XMLProcessing.unmarshalFromFile(file);
@@ -69,14 +69,14 @@ public class V20toolkit extends Application {
             AnchorPane personalityOverview = loader.load();
             rootLayout.setCenter(personalityOverview);
             PersonalityLayoutController controller = loader.getController();
-            controller.setMainApp(this);
+            controller.setMainApp(this, i18n);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     public void showTraitOverview() {
-        v20TraitData.add(new v20Trait());
+        v20TraitData.add(new v20Trait(i18n));
         File file = new File("resources/data/traits.xml");
         if (file.isFile()) {
             XMLWrapper wrapper = XMLProcessing.unmarshalFromFile(file);
@@ -91,7 +91,7 @@ public class V20toolkit extends Application {
             AnchorPane traitOverview = loader.load();
             rootLayout.setCenter(traitOverview);
             TraitLayoutController controller = loader.getController();
-            controller.setMainApp(this);
+            controller.setMainApp(this, i18n);
         } catch (IOException e) {
             e.printStackTrace();
         }

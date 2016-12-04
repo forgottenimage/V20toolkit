@@ -42,7 +42,7 @@ public class TraitEditDialogController {
         descriptionTextArea.setText(v20Trait.getDescription());
         attributeTextArea.setText(v20Trait.getAttribute());
         pointsTextArea.setText("" + v20Trait.getCost());
-        resourceTextArea.setText(v20Trait.getResources());
+        resourceTextArea.setText("");
         typeTextArea.setText(v20Trait.getType());
     }
 
@@ -57,7 +57,7 @@ public class TraitEditDialogController {
             v20Trait.setDescription(descriptionTextArea.getText());
             v20Trait.setAttribute(attributeTextArea.getText());
             v20Trait.setCost(Integer.parseInt(pointsTextArea.getText()));
-            v20Trait.setResources(resourceTextArea.getText());
+            //v20Trait.setResources("");
             v20Trait.setType(typeTextArea.getText());
             okClicked = true;
             dialogStage.close();

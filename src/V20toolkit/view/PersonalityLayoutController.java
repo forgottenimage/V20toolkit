@@ -8,8 +8,11 @@ import javafx.scene.control.*;
 import V20toolkit.V20toolkit;
 import V20toolkit.model.v20Personality;
 
+import java.util.ResourceBundle;
+
 public class PersonalityLayoutController {
 
+    private ResourceBundle i18n;
     @FXML
     private TableView<v20Personality> personalityTable;
     @FXML
@@ -34,8 +37,9 @@ public class PersonalityLayoutController {
         personalityTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> showPersonalityDetails(newValue));
     }
 
-    public void setMainApp(V20toolkit v20toolkit) {
+    public void setMainApp(V20toolkit v20toolkit, ResourceBundle i18n) {
         this.v20toolkit = v20toolkit;
+        this.i18n = i18n;
         personalityData = v20toolkit.getV20PersonalityData();
         personalityTable.setItems(personalityData);
     }
@@ -71,7 +75,7 @@ public class PersonalityLayoutController {
 
     @FXML
     private void handleNewPersonality() {
-        v20Personality tempV20Personality = new v20Personality();
+        v20Personality tempV20Personality = new v20Personality(i18n);
         boolean okClicked = v20toolkit.showPersonalityEditDialog(tempV20Personality);
         if (okClicked) {
             v20toolkit.getV20PersonalityData().add(tempV20Personality);

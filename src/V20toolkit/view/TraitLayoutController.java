@@ -8,8 +8,11 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
+import java.util.ResourceBundle;
+
 public class TraitLayoutController {
 
+    private ResourceBundle i18n;
     @FXML
     private TableView<v20Trait> traitTable;
     @FXML
@@ -40,8 +43,9 @@ public class TraitLayoutController {
         traitTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> showTraitDetails(newValue));
     }
 
-    public void setMainApp(V20toolkit v20toolkit) {
+    public void setMainApp(V20toolkit v20toolkit, ResourceBundle i18n) {
         this.v20toolkit = v20toolkit;
+        this.i18n = i18n;
         traitData = v20toolkit.getV20TraitData();
         traitTable.setItems(traitData);
     }
@@ -52,7 +56,7 @@ public class TraitLayoutController {
             typeLabel.setText(v20Trait.getType());
             attributeLabel.setText(v20Trait.getAttribute());
             pointsLabel.setText("" + v20Trait.getCost());
-            resourceLabel.setText(v20Trait.getResources());
+            resourceLabel.setText("");
             descriptionTextArea.setText(v20Trait.getDescription());
         } else {
             nameLabel.setText("");
@@ -81,7 +85,7 @@ public class TraitLayoutController {
 
     @FXML
     private void handleNewTrait() {
-        v20Trait tempV20Trait = new v20Trait();
+        v20Trait tempV20Trait = new v20Trait(i18n);
         boolean okClicked = v20toolkit.showTraitEditDialog(tempV20Trait);
         if (okClicked) {
             v20toolkit.getV20TraitData().add(tempV20Trait);
