@@ -1,21 +1,19 @@
 package V20toolkit.view;
 
 import V20toolkit.V20toolkit;
-import V20toolkit.model.Trait;
+import V20toolkit.model.v20Trait;
 import V20toolkit.util.XMLProcessing;
 import V20toolkit.util.XMLWrapper;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
-import java.util.List;
-
 public class TraitLayoutController {
 
     @FXML
-    private TableView<Trait> traitTable;
+    private TableView<v20Trait> traitTable;
     @FXML
-    private TableColumn<Trait, String> traitColumn;
+    private TableColumn<v20Trait, String> traitColumn;
     @FXML
     private Label typeLabel;
     @FXML
@@ -44,18 +42,18 @@ public class TraitLayoutController {
 
     public void setMainApp(V20toolkit v20toolkit) {
         this.v20toolkit = v20toolkit;
-        traitData = v20toolkit.getTraitData();
+        traitData = v20toolkit.getV20TraitData();
         traitTable.setItems(traitData);
     }
 
-    private void showTraitDetails(Trait trait) {
-        if (trait != null) {
-            nameLabel.setText(trait.getName());
-            typeLabel.setText(trait.getType());
-            attributeLabel.setText(trait.getAttribute());
-            pointsLabel.setText("" + trait.getPoints());
-            resourceLabel.setText(trait.getResource());
-            descriptionTextArea.setText(trait.getDescription());
+    private void showTraitDetails(v20Trait v20Trait) {
+        if (v20Trait != null) {
+            nameLabel.setText(v20Trait.getName());
+            typeLabel.setText(v20Trait.getType());
+            attributeLabel.setText(v20Trait.getAttribute());
+            pointsLabel.setText("" + v20Trait.getCost());
+            resourceLabel.setText(v20Trait.getResources());
+            descriptionTextArea.setText(v20Trait.getDescription());
         } else {
             nameLabel.setText("");
             typeLabel.setText("");
@@ -75,34 +73,34 @@ public class TraitLayoutController {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.initOwner(v20toolkit.getPrimaryStage());
             alert.setTitle("No Selection");
-            alert.setHeaderText("No Trait Selected");
-            alert.setContentText("Please select a Trait in the table.");
+            alert.setHeaderText("No v20Trait Selected");
+            alert.setContentText("Please select a v20Trait in the table.");
             alert.showAndWait();
         }
     }
 
     @FXML
     private void handleNewTrait() {
-        Trait tempTrait = new Trait();
-        boolean okClicked = v20toolkit.showTraitEditDialog(tempTrait);
+        v20Trait tempV20Trait = new v20Trait();
+        boolean okClicked = v20toolkit.showTraitEditDialog(tempV20Trait);
         if (okClicked) {
-            v20toolkit.getTraitData().add(tempTrait);
+            v20toolkit.getV20TraitData().add(tempV20Trait);
         }
     }
 
     @FXML
     private void handleEditTrait() {
-        Trait selectedTrait= traitTable.getSelectionModel().getSelectedItem();
-        if (selectedTrait != null) {
-            boolean okClicked = v20toolkit.showTraitEditDialog(selectedTrait);
+        v20Trait selectedV20Trait = traitTable.getSelectionModel().getSelectedItem();
+        if (selectedV20Trait != null) {
+            boolean okClicked = v20toolkit.showTraitEditDialog(selectedV20Trait);
             if (okClicked) {
-                showTraitDetails(selectedTrait);
+                showTraitDetails(selectedV20Trait);
             }
         } else {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.initOwner(v20toolkit.getPrimaryStage());
             alert.setTitle("No Selection");
-            alert.setHeaderText("No Trait Selected");
+            alert.setHeaderText("No v20Trait Selected");
             alert.setContentText("Please select a trait in the table.");
             alert.showAndWait();
         }
@@ -112,7 +110,7 @@ public class TraitLayoutController {
     private void handleSaveTraits() {
         String path = "resources/data/traits.xml";
         XMLWrapper wrapper = new XMLWrapper();
-        wrapper.setTraits(traitData);
+        wrapper.setV20Traits(traitData);
         XMLProcessing.marshalToFile(path, wrapper);
     }
 }

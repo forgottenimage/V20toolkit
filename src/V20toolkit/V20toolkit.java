@@ -22,21 +22,19 @@ import java.util.ResourceBundle;
 
 public class V20toolkit extends Application {
 
-    public ResourceBundle i18n;
-    private Locale currentLocale;
+    private ResourceBundle i18n;
     private Stage primaryStage;
     private BorderPane rootLayout;
-    private ObservableList<Personality> personalityData = FXCollections.observableArrayList();
-    private ObservableList<Trait> traitData = FXCollections.observableArrayList();
+    private ObservableList<v20Personality> v20PersonalityData = FXCollections.observableArrayList();
+    private ObservableList<v20Trait> v20TraitData = FXCollections.observableArrayList();
 
-    public ObservableList<Personality> getPersonalityData() {
-        return personalityData;
+    public ObservableList<v20Personality> getV20PersonalityData() {
+        return v20PersonalityData;
     }
-    public ObservableList<Trait> getTraitData() { return traitData; }
+    public ObservableList<v20Trait> getV20TraitData() { return v20TraitData; }
     public Stage getPrimaryStage() {
         return primaryStage;
     }
-    public ResourceBundle getI18n() { return i18n; }
 
     public V20toolkit (){}
 
@@ -56,13 +54,13 @@ public class V20toolkit extends Application {
     }
 
     public void showPersonalityOverview() {
-        personalityData.add(new Personality());
+        v20PersonalityData.add(new v20Personality());
         File file = new File("resources/data/personalities.xml");
         if (file.isFile()) {
             XMLWrapper wrapper =  XMLProcessing.unmarshalFromFile(file);
             if (wrapper.getPersonalities()!= null) {
-                personalityData.clear();
-                personalityData.addAll(wrapper.getPersonalities());
+                v20PersonalityData.clear();
+                v20PersonalityData.addAll(wrapper.getPersonalities());
             }
         }
         try {
@@ -78,13 +76,13 @@ public class V20toolkit extends Application {
     }
 
     public void showTraitOverview() {
-        traitData.add(new Trait());
+        v20TraitData.add(new v20Trait());
         File file = new File("resources/data/traits.xml");
         if (file.isFile()) {
             XMLWrapper wrapper = XMLProcessing.unmarshalFromFile(file);
-            if (wrapper.getTraits() != null) {
-                traitData.clear();
-                traitData.addAll(wrapper.getTraits());
+            if (wrapper.getV20Traits() != null) {
+                v20TraitData.clear();
+                v20TraitData.addAll(wrapper.getV20Traits());
             }
         }
         try {
@@ -99,7 +97,7 @@ public class V20toolkit extends Application {
         }
     }
 
-    public boolean showPersonalityEditDialog(Personality personality) {
+    public boolean showPersonalityEditDialog(v20Personality v20Personality) {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(V20toolkit.class.getResource("/V20toolkit/view/PersonalityEditDialog.fxml"));
@@ -112,7 +110,7 @@ public class V20toolkit extends Application {
             dialogStage.setScene(scene);
             PersonalityEditDialogController controller = loader.getController();
             controller.setDialogStage(dialogStage);
-            controller.setPersonality(personality);
+            controller.setV20Personality(v20Personality);
             dialogStage.showAndWait();
             return controller.isOkClicked();
         } catch (IOException e) {
@@ -121,7 +119,7 @@ public class V20toolkit extends Application {
         }
     }
 
-    public boolean showTraitEditDialog(Trait trait) {
+    public boolean showTraitEditDialog(v20Trait v20Trait) {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(V20toolkit.class.getResource("/V20toolkit/view/TraitEditDialog.fxml"));
@@ -134,7 +132,7 @@ public class V20toolkit extends Application {
             dialogStage.setScene(scene);
             TraitEditDialogController controller = loader.getController();
             controller.setDialogStage(dialogStage);
-            controller.setTrait(trait);
+            controller.setV20Trait(v20Trait);
             dialogStage.showAndWait();
             return controller.isOkClicked();
         } catch (IOException e) {
@@ -149,9 +147,7 @@ public class V20toolkit extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-
-        currentLocale = new Locale("en", "GB");
-        i18n = ResourceBundle.getBundle("bundles.locale", currentLocale);
+        i18n = ResourceBundle.getBundle("bundles.locale", new Locale("en", "GB"));
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle(i18n.getString("v20_title"));
         this.primaryStage.getIcons().add(new Image("file:resources/images/ident_icon.png"));

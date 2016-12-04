@@ -23,9 +23,9 @@
                 <RowConstraints minHeight="10.0" prefHeight="110.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-                <Label text="Personality" />
-                <Label text="Description" GridPane.rowIndex="1" />
-                <Label text="Willpower Condition" GridPane.rowIndex="2" />
+                <Label fx:id="nameLabel"/>
+                <Label fx:id="descriptionLabel" GridPane.rowIndex="1" />
+                <Label fx:id="willpowerConditionLabel" GridPane.rowIndex="2" />
             <TextArea fx:id="nameTextArea" wrapText="true" GridPane.columnIndex="1">
                <GridPane.margin>
                   <Insets />

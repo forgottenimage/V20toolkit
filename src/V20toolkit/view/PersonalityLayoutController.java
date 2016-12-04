@@ -6,16 +6,14 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import V20toolkit.V20toolkit;
-import V20toolkit.model.Personality;
-
-import java.util.List;
+import V20toolkit.model.v20Personality;
 
 public class PersonalityLayoutController {
 
     @FXML
-    private TableView<Personality> personalityTable;
+    private TableView<v20Personality> personalityTable;
     @FXML
-    private TableColumn<Personality, String> personalityColumn;
+    private TableColumn<v20Personality, String> personalityColumn;
     @FXML
     private Label nameLabel;
     @FXML
@@ -38,15 +36,15 @@ public class PersonalityLayoutController {
 
     public void setMainApp(V20toolkit v20toolkit) {
         this.v20toolkit = v20toolkit;
-        personalityData = v20toolkit.getPersonalityData();
+        personalityData = v20toolkit.getV20PersonalityData();
         personalityTable.setItems(personalityData);
     }
 
-    private void showPersonalityDetails(Personality personality) {
-        if (personality != null) {
-            nameLabel.setText(personality.getName());
-            descriptionTextArea.setText(personality.getDescription());
-            willpowerConditionTextArea.setText(personality.getWillpowerCondition());
+    private void showPersonalityDetails(v20Personality v20Personality) {
+        if (v20Personality != null) {
+            nameLabel.setText(v20Personality.getName());
+            descriptionTextArea.setText(v20Personality.getDescription());
+            willpowerConditionTextArea.setText(v20Personality.getWillpowerCondition());
         } else {
             nameLabel.setText("");
             descriptionTextArea.setText("");
@@ -64,7 +62,7 @@ public class PersonalityLayoutController {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.initOwner(v20toolkit.getPrimaryStage());
             alert.setTitle("No Selection");
-            alert.setHeaderText("No Personality Selected");
+            alert.setHeaderText("No v20Personality Selected");
             alert.setContentText("Please select a personality in the table.");
 
             alert.showAndWait();
@@ -73,20 +71,20 @@ public class PersonalityLayoutController {
 
     @FXML
     private void handleNewPersonality() {
-        Personality tempPersonality = new Personality();
-        boolean okClicked = v20toolkit.showPersonalityEditDialog(tempPersonality);
+        v20Personality tempV20Personality = new v20Personality();
+        boolean okClicked = v20toolkit.showPersonalityEditDialog(tempV20Personality);
         if (okClicked) {
-            v20toolkit.getPersonalityData().add(tempPersonality);
+            v20toolkit.getV20PersonalityData().add(tempV20Personality);
         }
     }
 
     @FXML
     private void handleEditPersonality() {
-        Personality selectedPersonality = personalityTable.getSelectionModel().getSelectedItem();
-        if (selectedPersonality != null) {
-            boolean okClicked = v20toolkit.showPersonalityEditDialog(selectedPersonality);
+        v20Personality selectedV20Personality = personalityTable.getSelectionModel().getSelectedItem();
+        if (selectedV20Personality != null) {
+            boolean okClicked = v20toolkit.showPersonalityEditDialog(selectedV20Personality);
             if (okClicked) {
-                showPersonalityDetails(selectedPersonality);
+                showPersonalityDetails(selectedV20Personality);
             }
 
         } else {

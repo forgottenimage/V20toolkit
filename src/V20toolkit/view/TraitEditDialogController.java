@@ -1,6 +1,6 @@
 package V20toolkit.view;
 
-import V20toolkit.model.Trait;
+import V20toolkit.model.v20Trait;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextArea;
@@ -25,7 +25,7 @@ public class TraitEditDialogController {
     private TextArea descriptionTextArea;
 
     private Stage dialogStage;
-    private Trait trait;
+    private v20Trait v20Trait;
     private boolean okClicked = false;
 
     @FXML
@@ -35,15 +35,15 @@ public class TraitEditDialogController {
         this.dialogStage = dialogStage;
     }
 
-    public void setTrait(Trait trait) {
-        this.trait = trait;
+    public void setV20Trait(v20Trait v20Trait) {
+        this.v20Trait = v20Trait;
 
-        nameTextArea.setText(trait.getName());
-        descriptionTextArea.setText(trait.getDescription());
-        attributeTextArea.setText(trait.getAttribute());
-        pointsTextArea.setText("" + trait.getPoints());
-        resourceTextArea.setText(trait.getResource());
-        typeTextArea.setText(trait.getType());
+        nameTextArea.setText(v20Trait.getName());
+        descriptionTextArea.setText(v20Trait.getDescription());
+        attributeTextArea.setText(v20Trait.getAttribute());
+        pointsTextArea.setText("" + v20Trait.getCost());
+        resourceTextArea.setText(v20Trait.getResources());
+        typeTextArea.setText(v20Trait.getType());
     }
 
     public boolean isOkClicked() {
@@ -53,12 +53,12 @@ public class TraitEditDialogController {
     @FXML
     private void handleOk() {
         if (isInputValid()) {
-            trait.setName(nameTextArea.getText());
-            trait.setDescription(descriptionTextArea.getText());
-            trait.setAttribute(attributeTextArea.getText());
-            trait.setPoints(Integer.parseInt(pointsTextArea.getText()));
-            trait.setResource(resourceTextArea.getText());
-            trait.setType(typeTextArea.getText());
+            v20Trait.setName(nameTextArea.getText());
+            v20Trait.setDescription(descriptionTextArea.getText());
+            v20Trait.setAttribute(attributeTextArea.getText());
+            v20Trait.setCost(Integer.parseInt(pointsTextArea.getText()));
+            v20Trait.setResources(resourceTextArea.getText());
+            v20Trait.setType(typeTextArea.getText());
             okClicked = true;
             dialogStage.close();
         }

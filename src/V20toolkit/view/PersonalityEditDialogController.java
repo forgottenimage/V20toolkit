@@ -2,69 +2,74 @@ package V20toolkit.view;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
-import V20toolkit.model.Personality;
+import V20toolkit.model.v20Personality;
+
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 public class PersonalityEditDialogController {
 
+    private ResourceBundle i18n;
+    @FXML
+    private Label nameLabel;
     @FXML
     private TextArea nameTextArea;
     @FXML
+    private Label descriptionLabel;
+    @FXML
     private TextArea descriptionTestArea;
+    @FXML
+    private Label willpowerConditionLabel;
     @FXML
     private TextArea willpowerConditionTextArea;
 
     private Stage dialogStage;
-    private Personality personality;
+    private v20Personality v20Personality;
     private boolean okClicked = false;
 
     @FXML
-    private void initialize() {}
+    private void initialize() {
+        i18n = ResourceBundle.getBundle("bundles.locale", new Locale("en", "GB"));
+        nameLabel.setText(i18n.getString("cmm_name"));
+        descriptionLabel.setText(i18n.getString("cmm_description"));
+        willpowerConditionLabel.setText(i18n.getString("v20_willpowerCondition"));
+    }
 
     public void setDialogStage(Stage dialogStage) {
         this.dialogStage = dialogStage;
     }
 
-    public void setPersonality(Personality personality) {
-        this.personality = personality;
+    public void setV20Personality(v20Personality v20Personality) {
+        this.v20Personality = v20Personality;
 
-        nameTextArea.setText(personality.getName());
-        descriptionTestArea.setText(personality.getDescription());
-        willpowerConditionTextArea.setText(personality.getWillpowerCondition());
+        nameTextArea.setText(v20Personality.getName());
+        descriptionTestArea.setText(v20Personality.getDescription());
+        willpowerConditionTextArea.setText(v20Personality.getWillpowerCondition());
     }
 
     public boolean isOkClicked() {
         return okClicked;
     }
 
-    /**
-     * Called when the user clicks ok.
-     */
     @FXML
     private void handleOk() {
         if (isInputValid()) {
-            personality.setName(nameTextArea.getText());
-            personality.setDescription(descriptionTestArea.getText());
-            personality.setWillpowerCondition(willpowerConditionTextArea.getText());
+            v20Personality.setName(nameTextArea.getText());
+            v20Personality.setDescription(descriptionTestArea.getText());
+            v20Personality.setWillpowerCondition(willpowerConditionTextArea.getText());
             okClicked = true;
             dialogStage.close();
         }
     }
 
-    /**
-     * Called when the user clicks cancel.
-     */
     @FXML
     private void handleCancel() {
         dialogStage.close();
     }
 
-    /**
-     * Validates the user input in the text fields.
-     *
-     * @return true if the input is valid
-     */
     private boolean isInputValid() {
         String errorMessage = "";
 
