@@ -32,7 +32,7 @@ public class PersonalityLayoutController {
     @FXML
     private void initialize() {
         // TODO Workaround: Used TableView instead of ListView to show the Name. It works but doesn't look very well.
-        personalityColumn.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
+        personalityColumn.setCellValueFactory(cellData -> cellData.getValue().getNameProperty());
         showPersonalityDetails(null);
         personalityTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> showPersonalityDetails(newValue));
     }

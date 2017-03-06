@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<resources>
-    <v20Personality>
-        <description>Personality description</description>
-        <name>Name of the Personality</name>
-        <willpowerCondition>Condition for regaining the Willpower</willpowerCondition>
-    </v20Personality>
-</resources>
+<root>
+    <personality>
+        <description>Description</description>
+        <name>Name</name>
+        <willpowerCondition>Willpower Condition</willpowerCondition>
+    </personality>
+</root>

@@ -1,19 +1,22 @@
 package V20toolkit.util;
 
 import V20toolkit.model.*;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
 
-@XmlRootElement(name = "resources")
+@XmlRootElement(name = "root")
 public class XMLWrapper {
 
     private List<v20Personality> personalities;
     private List<v20Trait> v20Traits;
-    private List<v20Discipline> v20Disciplines;
+    /*private List<v20Discipline> v20Disciplines;
     private List<v20Ritual> v20Rituals;
     private List<v20Background> v20Backgrounds;
-    private List<v20Path> v20Paths;
+    private List<v20Path> v20Paths;*/
 
     public XMLWrapper () {}
 
@@ -22,8 +25,8 @@ public class XMLWrapper {
         return personalities;
     }
 
-    public void setPersonalities(List<v20Personality> persons) {
-        this.personalities = persons;
+    public void setPersonalities(List<v20Personality> personalities) {
+        this.personalities = personalities;
     }
 
     @XmlElement(name = "trait")
@@ -31,11 +34,11 @@ public class XMLWrapper {
         return v20Traits;
     }
 
-    public void setV20Traits(List<v20Trait> v20Traits) {
-        this.v20Traits = v20Traits;
+    public void setV20Traits(List<v20Trait> traits) {
+        this.v20Traits = traits;
     }
 
-    @XmlElement(name = "discipline")
+    /*@XmlElement(name = "discipline")
     public List<v20Discipline> getV20Disciplines() {
         return v20Disciplines;
     }
@@ -69,5 +72,5 @@ public class XMLWrapper {
 
     public void setV20Paths(List<v20Path> v20Paths) {
         this.v20Paths = v20Paths;
-    }
+    }*/
 }

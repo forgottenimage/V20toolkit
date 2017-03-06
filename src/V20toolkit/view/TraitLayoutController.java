@@ -38,7 +38,7 @@ public class TraitLayoutController {
     @FXML
     private void initialize() {
         // TODO Workaround: Used TableView instead of ListView to show the Name. It works but doesn't look very well.
-        traitColumn.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
+        traitColumn.setCellValueFactory(cellData -> cellData.getValue().getNameProperty());
         showTraitDetails(null);
         traitTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> showTraitDetails(newValue));
     }

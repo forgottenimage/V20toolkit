@@ -7,7 +7,7 @@ public class v20Object {
     public StringProperty description;
 
     public String getName() {
-        return name.get();
+        return nameProperty().get();
     }
 
     public StringProperty nameProperty() {
